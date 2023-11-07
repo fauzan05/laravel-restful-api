@@ -256,7 +256,6 @@ class AddressTest extends TestCase
     {
         $this->seed([UserSeeder::class, ContactSeeder::class, AddressSeeder::class]);
         $contact = Contact::limit(1)->first();
-        $address = Address::limit(1)->first();
         $this->get('/api/contacts/'. $contact->id +1 . '/addresses', 
         [
             'Authorization' => 'token01'
