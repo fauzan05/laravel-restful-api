@@ -93,10 +93,7 @@ class ContactController extends Controller
          $page = $request->input('page', 1);
          $size = $request->input('size', 10);
 
-        //  $contacts = Contact::where('user_id', $user->id)->first();  
-            $contacts = DB::table('contacts')
-            ->where('user_id', $user->id)
-            ->first();
+         $contacts = Contact::where('user_id', $user->id)->first();  
          if(!$contacts){
             throw new HttpResponseException(response()->json([
                 'error_message' => [
@@ -104,8 +101,7 @@ class ContactController extends Controller
                 ]
             ])->setStatusCode(404));
         }
-$contacts = $contacts = Contact::where('user_id', $user->id)->where(function(Builder $builder) use ($request) {
-        //  $contacts = $contacts->where(function(Builder $builder) use ($request) {
+         $contacts = $contacts->where(function(Builder $builder) use ($request) {
             $id = $request->input('id');
             if($id) {
                 $builder->where('id', 'like' , '%' . $id . '%');
